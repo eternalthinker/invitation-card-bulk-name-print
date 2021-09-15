@@ -1,0 +1,28 @@
+@font-face {
+  font-family: "Now";
+  font-weight: 400;
+  src: url('./fonts/now.regular.otf');
+}
+
+@font-face {
+  font-family: "Now";
+  font-weight: 500;
+  src: url('./fonts/now.medium.otf');
+}
+
+@font-face {
+  font-family: "Now";
+  font-weight: 700;
+  src: url('./fonts/now.bold.otf');
+}
+
+body {
+  font-family: "Now";
+  padding: 50px;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
