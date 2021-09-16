@@ -9,6 +9,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "file-saver": "^2.0.5",
+    "jszip": "^3.7.1",
+    "pdf-lib": "^1.16.0",
+    "pdfjs-dist": "^2.9.359",
+    "worker-loader": "^3.0.8"
   },
   "devDependencies": {
     "css-loader": "^5.0.0",
