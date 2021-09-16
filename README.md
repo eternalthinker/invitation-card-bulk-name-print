@@ -6,3 +6,6 @@
 - [] Text colour selection
 - [] Configure text prefix and suffix
 - [] Configure preview text
+- [] Carousel preview of final PDFs with download option
+- [] PDF vs png download options
+- [] Progress info while processing names
