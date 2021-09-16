@@ -71,6 +71,18 @@ module.exports = {
           },
         ],
       },
+      {
+        // Apply rule for csv files
+        test: /\.(csv|txt)$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              outputPath: "csv",
+            },
+          },
+        ],
+      },
     ],
   },
 };
