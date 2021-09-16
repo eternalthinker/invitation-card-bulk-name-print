@@ -1,11 +1,12 @@
-- [ ] Image -> PDF
-- [ ] ZIP download
+- [x] Image -> PDF
+- [x] ZIP download
 - [ ] Image upload
 - [ ] Keep image in localstorage after upload
 - [ ] Text y-position based on draggable text on preview
+- [ ] Progress info while processing names
+- [ ] Download button in case auto-downlaod is blocked
 - [ ] Text colour selection
 - [ ] Configure text prefix and suffix
 - [ ] Configure preview text
 - [ ] Carousel preview of final PDFs with download option
 - [ ] PDF vs png download options
-- [ ] Progress info while processing names
