@@ -1,0 +1,8 @@
+- [] Image -> PDF
+- [] ZIP download
+- [] Image upload
+- [] Keep image in localstorage after upload
+- [] Text y-position based on draggable text on preview
+- [] Text colour selection
+- [] Configure text prefix and suffix
+- [] Configure preview text
