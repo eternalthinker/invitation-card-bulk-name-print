@@ -21,7 +21,10 @@ export async function addNamesToCard() {
       const nameStr = `Dear ${guest}`.toUpperCase();
       addNameToCard(canvas, cardImg, nameStr);
       const pdfBase64 = await imgToPdf(canvas);
-      pdfBase64List.push([guest.replace('&', '').replace(' ', '_'), pdfBase64]);
+      pdfBase64List.push({
+        filename: guest.replace(/\W+/g, '_').toLowerCase(),
+        pdfBase64,
+      });
       showPdf(pdfBase64);
     };
 
@@ -34,9 +37,9 @@ export async function addNamesToCard() {
 
 async function downloadZip(pdfBase64List) {
   const zip = new JSZip();
-  for (const pdfinfo of pdfBase64List) {
-    const [ guest, pdfBase64 ] = pdfinfo;
-    zip.file(`${guest}.pdf`, pdfBase64, { base64: true });
+  for (const pdfInfo of pdfBase64List) {
+    const { filename, pdfBase64 } = pdfInfo;
+    zip.file(`${filename}.pdf`, pdfBase64, { base64: true });
   };
   zip.generateAsync({ type: 'blob'})
     .then(content => {
@@ -65,30 +68,33 @@ async function showIframe(pdfBase64) {
 }
 
 async function showPdf(pdfBase64) {
-  return new Promise((res, rej) => {
-    const pdfBinary = atob(pdfBase64);
-    let loadingTask = pdfjsLib.getDocument({ data: pdfBinary });
-    loadingTask.promise.then(pdf => {
+  return new Promise(async (res, rej) => {
+    try {
+      const pdfBinary = atob(pdfBase64);
+      const loadingTask = pdfjsLib.getDocument({ data: pdfBinary });
+      const pdf = await loadingTask.promise;
       const pageNumber = 1;
-      pdf.getPage(pageNumber).then(page => {
-        const viewport = page.getViewport({ scale: 0.3 });
-        const pdfCanvas = document.createElement('canvas');
-        document.body.appendChild(pdfCanvas);
-        const pdfCtx = pdfCanvas.getContext('2d');
-        pdfCanvas.width = viewport.width;
-        pdfCanvas.height = viewport.height;
-        const renderCtx = {
-          canvasContext: pdfCtx,
-          viewport,
-        };
-        var renderTask = page.render(renderCtx);
-        renderTask.promise.then(function () {
-          res(true);
-        });
-      });
-    }).catch(err => rej(err));
+      const page = await pdf.getPage(pageNumber);
+
+      const viewport = page.getViewport({ scale: 0.3 });
+      const pdfCanvas = document.createElement('canvas');
+      document.body.appendChild(pdfCanvas);
+      const pdfCtx = pdfCanvas.getContext('2d');
+      pdfCanvas.width = viewport.width;
+      pdfCanvas.height = viewport.height;
+      const renderCtx = {
+        canvasContext: pdfCtx,
+        viewport,
+      };
+
+      const renderTask = page.render(renderCtx);
+      await renderTask.promise;
+      return res(true);
+    }
+    catch(err) {
+      rej(err);
+    }
   });
-  
 }
 
 async function imgToPdf(canvas) {

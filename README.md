@@ -2,6 +2,9 @@
 - [x] ZIP download
 - [ ] Image upload
 - [ ] Keep image in localstorage after upload
+- [ ] CSV upload
+- [ ] Delete localstorage image and csv button
+- [ ] Text box with contents of csv?
 - [ ] Text y-position based on draggable text on preview
 - [ ] Progress info while processing names
 - [ ] Download button in case auto-downlaod is blocked
