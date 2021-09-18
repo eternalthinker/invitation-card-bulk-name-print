@@ -1,11 +1,12 @@
 - [x] Image -> PDF
 - [x] ZIP download
-- [ ] Image upload
+- [x] Image upload
+- [ ] Download button
 - [ ] Keep image in localstorage after upload
 - [ ] CSV upload
-- [ ] Delete localstorage image and csv button
-- [ ] Text box with contents of csv?
-- [ ] Text y-position based on draggable text on preview
+- [x] Delete localstorage image and csv button - WONTDO: new uploads overwrite old ones
+- [x] Text box with contents of csv?: WONTDO
+- [x] Text y-position based on draggable text on preview
 - [ ] Progress info while processing names
 - [ ] Download button in case auto-downlaod is blocked
 - [ ] Text colour selection

@@ -4,6 +4,7 @@ import { PDFDocument } from 'pdf-lib';
 import * as pdfjsLib from 'pdfjs-dist/webpack';
 import * as JSZip from 'jszip';
 import { saveAs } from 'file-saver';
+import { loadImage } from './utils';
 
 export async function addNamesToCard() {
   try {
@@ -28,7 +29,7 @@ export async function addNamesToCard() {
       showPdf(pdfBase64);
     };
 
-    downloadZip(pdfBase64List);
+    // downloadZip(pdfBase64List);
   }
   catch (err) {
     console.log(err);
@@ -123,15 +124,4 @@ async function loadGuestsCsv(csvPath) {
   });
 }
 
-async function loadImage(imgPath) {  
-  return new Promise((resolve, reject) => {
-    const image = new Image();
-    image.onload = function () {
-      resolve(image);
-    }
-    image.onerror = function () {
-      reject(new Error(`Image ${imgPath} cannot be loaded`));
-    }
-    image.src = imgPath;
-  });
-} 
+

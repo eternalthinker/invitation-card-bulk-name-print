@@ -19,10 +19,52 @@
 body {
   font-family: "Now";
   padding: 50px;
+  font-size: 1em;
 }
 
 h1 {
   font-weight: 700;
   font-size: 24px;
   margin-bottom: 20px;
+}
+
+.imageUpload {
+  margin: 20px 0;
+  display: flex;
+}
+
+.imageUploadButton {
+  background-color: blueviolet;
+  color: rgb(247, 221, 255);
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+
+.imageUploadButton:hover {
+  background-color: rgb(150, 73, 223);
+  color: #fff;
+  box-shadow: 0px 10px 12px rgba(150, 73, 223, 0.4);
+  transform: translateY(-5px);
+}
+
+.cardPreview {
+  width: 75vmin;
+  height: 75vmax;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: top left;
+  position: relative;
+}
+
+.previewText {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-transform: uppercase;
+  user-select: none;
+  cursor: move;
 }
