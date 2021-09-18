@@ -42,7 +42,7 @@ export function initUi(config) {
   
   downloadButton.addEventListener('click', () => downloadZip(config.resultCards));
   const postProcessCallback = () => {
-    downloadButton.style.visibility = 'visible';
+    downloadButton.classList.remove('disabled');
   };
   processButton.addEventListener('click', () => addNamesToCard(_config, postProcessCallback));
 }
@@ -90,7 +90,7 @@ function processCsvFile(e) {
     const csvFile = reader.result;
     const guestList = csvFile.split(/\r\n|\n/);
     _config.guestList = guestList;
-    processButton.style.visibility = 'visible';
+    processButton.classList.remove('disabled');
   };
   reader.readAsText(file);
 }
@@ -112,7 +112,7 @@ function addImagePreview(file) {
     previewTag.style.backgroundImage = `url(${reader.result})`;
     scalingFactor = _config.previewWidth / _config.cardImg.width;
     showTextControls();
-    uploadCsvButton.style.visibility = 'visible';
+    uploadCsvButton.classList.remove('disabled');
   };
   reader.readAsDataURL(file);
 }

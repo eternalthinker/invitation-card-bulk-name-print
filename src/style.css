@@ -45,6 +45,9 @@ h1 {
   border: none;
   outline: none;
   font-size: 1em;
+  line-height: 1em;
+  font-family: "Now";
+  vertical-align: middle;
 }
 
 .actionButton:hover {
@@ -54,10 +57,17 @@ h1 {
   transform: translateY(-5px);
 }
 
-.csvUploadButton,
-.processButton,
-.downloadButton {
-  visibility: hidden;
+.actionButton.disabled {
+  background-color: #ccc;
+  color: #888;
+  pointer-events: none;
+  cursor: not-allowed;
+  box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.06);
+}
+
+.actionButton.disabled:hover {
+  background-color: #ccc;
+  color: #888;
 }
 
 .cardPreview {

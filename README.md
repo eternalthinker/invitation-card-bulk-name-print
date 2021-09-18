@@ -12,8 +12,9 @@
 - [x] Fix text preview position mapping to final canvas
 - [ ] Service worker processing of cards in bg
 - [ ] Progress info while processing names
-- [ ] Keep image in localstorage after upload
+- [x] Keep image in localstorage after upload: WONTDO
 - [ ] Text colour selection
 - [ ] Configure text prefix and suffix
-- [ ] Configure preview text
+- [ ] Configure preview text contents
+- [ ] Possible multiline text and preview text
 
