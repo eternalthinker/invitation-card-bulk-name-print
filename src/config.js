@@ -8,11 +8,17 @@ export const config = {
     font: {
       family: 'Now',
       weight: 'bold',
-      size: 32,
+      size: 32, // px
     },
     position: {
-      y: 530,
+      y: 530, //px
     }
   },
-  addNamesToCardCallback: undefined,
+  guestList: undefined,
+  resultCards: [
+    /*
+    { guest_filename, pdfBase64 }
+    */
+  ],
+  resultContainerEl: undefined,
 };

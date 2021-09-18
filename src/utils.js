@@ -10,3 +10,15 @@ export async function loadImage(imgPath) {
     image.src = imgPath;
   });
 } 
+
+async function loadGuestsCsv(csvPath) {
+  return new Promise((resolve, reject) => {
+    fetch(csvPath)
+      .then(res => res.text())
+      .then(guestsCsv => {
+        const names = guestsCsv.split(/\r\n|\n/);
+        resolve(names);
+      })
+      .catch(err => { reject(err); });
+  });
+}

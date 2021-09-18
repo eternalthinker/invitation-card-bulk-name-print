@@ -1,16 +1,19 @@
 - [x] Image -> PDF
 - [x] ZIP download
 - [x] Image upload
-- [ ] Download button
-- [ ] Keep image in localstorage after upload
-- [ ] CSV upload
+- [x] Download button
+- [x] CSV upload
 - [x] Delete localstorage image and csv button - WONTDO: new uploads overwrite old ones
 - [x] Text box with contents of csv?: WONTDO
 - [x] Text y-position based on draggable text on preview
+- [x] Download button in case auto-downlaod is blocked: No Autodownload
+- [x] Carousel preview of final PDFs with download option: WONTDO
+- [x] PDF vs png download options: WONTDO
+- [x] Fix text preview position mapping to final canvas
+- [ ] Service worker processing of cards in bg
 - [ ] Progress info while processing names
-- [ ] Download button in case auto-downlaod is blocked
+- [ ] Keep image in localstorage after upload
 - [ ] Text colour selection
 - [ ] Configure text prefix and suffix
 - [ ] Configure preview text
-- [ ] Carousel preview of final PDFs with download option
-- [ ] PDF vs png download options
+

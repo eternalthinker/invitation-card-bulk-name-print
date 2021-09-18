@@ -1,15 +1,21 @@
 import { loadImage } from './utils';
+import { addNamesToCard, downloadZip } from './add_names_to_card';
 
 let _config = undefined;
 let previewText = undefined;
 let previewTag = undefined;
+let uploadCsvButton = undefined;
+let processButton = undefined;
+let downloadButton = undefined;
 let scalingFactor = 1;
 
 export function initUi(config) {
   _config = config;
 
+  // Preview area
   previewTag = document.querySelector('.cardPreview');
   const sizer = function() {
+    previewTag.style.width = `${window.innerWidth * 0.7}px`
     _config.previewWidth = previewTag.clientWidth;
     // const dpi = window.devicePixelRatio; // In case of errors in retina
   };
@@ -18,11 +24,27 @@ export function initUi(config) {
     sizer();
   });
 
-  const imageUploadButton = document.querySelector('#imageUploadInput');
-  imageUploadButton.addEventListener('change', processImageFile);
+  const imageUploadInput = document.querySelector('#imageUploadInput');
+  imageUploadInput.addEventListener('change', processImageFile);
 
   previewText = document.querySelector('.previewText');
   initTextDrag();
+
+  const uploadCsvInput = document.querySelector('#csvUploadInput');
+  uploadCsvInput.addEventListener('change', processCsvFile);
+
+  _config.resultContainerEl = document.querySelector('.resultSection');
+
+  uploadCsvButton = document.querySelector('.csvUploadButton');
+  processButton = document.querySelector('.processButton');
+  downloadButton = document.querySelector('.downloadButton');
+
+  
+  downloadButton.addEventListener('click', () => downloadZip(config.resultCards));
+  const postProcessCallback = () => {
+    downloadButton.style.visibility = 'visible';
+  };
+  processButton.addEventListener('click', () => addNamesToCard(_config, postProcessCallback));
 }
 
 function initTextDrag() {
@@ -53,9 +75,24 @@ function initTextDrag() {
         previewText.style.top = prevTop;
         isTextDragged = false;
       }
-      _config.guest.position.y = previewText.style.top / scalingFactor;
+      _config.guest.position.y = previewText.offsetTop / scalingFactor;
     }
   })
+}
+
+function processCsvFile(e) {
+  const file = e.currentTarget.files[0];
+  if (!file) {
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = async function() {
+    const csvFile = reader.result;
+    const guestList = csvFile.split(/\r\n|\n/);
+    _config.guestList = guestList;
+    processButton.style.visibility = 'visible';
+  };
+  reader.readAsText(file);
 }
 
 function processImageFile(e) {
@@ -69,17 +106,20 @@ function processImageFile(e) {
 function addImagePreview(file) {
   const reader = new FileReader();
   reader.onload = async function() {
+    const cardImg = await loadImage(reader.result);
+    _config.cardImg = cardImg;
+    previewTag.style.height = `${previewTag.clientWidth * cardImg.height / cardImg.width}px`;
     previewTag.style.backgroundImage = `url(${reader.result})`;
-    _config.cardImg = await loadImage(reader.result);
     scalingFactor = _config.previewWidth / _config.cardImg.width;
     showTextControls();
+    uploadCsvButton.style.visibility = 'visible';
   };
   reader.readAsDataURL(file);
 }
 
 function showTextControls() {
   updatePreviewText();
-  previewText.style.opacity = 1;
+  previewText.style.visibility = 'visible';
 }
 
 function updatePreviewText() {
