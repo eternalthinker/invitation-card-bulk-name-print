@@ -18,6 +18,10 @@ export function initUi(config) {
     previewTag.style.width = `${window.innerWidth * 0.7}px`
     _config.previewWidth = previewTag.clientWidth;
     // const dpi = window.devicePixelRatio; // In case of errors in retina
+    if (_config.cardImg) {
+      scalingFactor = _config.previewWidth / _config.cardImg.width;
+      updatePreviewText();
+    }
   };
   sizer();
   window.addEventListener('resize', function() {
