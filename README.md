@@ -10,8 +10,10 @@
 - [x] Carousel preview of final PDFs with download option: WONTDO
 - [x] PDF vs png download options: WONTDO
 - [x] Fix text preview position mapping to final canvas
-- [ ] Web worker processing of cards in bg
+- [x] Web worker processing of cards in bg
 - [ ] Progress info while processing names
+- [ ] Web worker show PDF
+- [ ] Fix scaling factor calculation when resize to increase window size
 - [x] Keep image in localstorage after upload: WONTDO
 - [ ] Text colour selection
 - [ ] Configure text prefix and suffix

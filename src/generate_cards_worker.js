@@ -1,13 +1,29 @@
 import { addNameToCard, imgToPdf } from './add_names_to_card';
+import nowBoldFont from './fonts/now.bold.otf';
 
 onmessage = async (e) => {
-  console.log('W: Message from main thread:', e.data);
+  try {
+    const fontFace = new FontFace(
+      'Now',
+      `url(${nowBoldFont})`,
+    );
+    // add it to the list of fonts our worker supports
+    self.fonts.add(fontFace);
+    // load the font
+    await fontFace.load()
 
-  await addNamesToCard(e.data);
+    await addNamesToCard(e.data);
 
-  postMessage({
-    pdfBase64: 'base64,hi-im-pdf',
-  });
+    postMessage({
+      type: 'end',
+    });
+  }
+  catch (err) {
+    postMessage({
+      type: 'error',
+      error: err,
+    });
+  }
 };
 
 async function addNamesToCard(data) {
@@ -17,14 +33,21 @@ async function addNamesToCard(data) {
     cardImg,
     guestConfig,
   } = data;
-  for(const guest of guestList) {
+  for(let i = 0; i < guestList.length; ++i) {
+    const guest = guestList[i];
     if (guest.length === 0) {
       return;
     }
     const nameStr = `${guestConfig.prefix}${guest}${guestConfig.suffix}`.toUpperCase();
     addNameToCard(canvas, cardImg, nameStr, guestConfig);
     const pdfBase64 = await imgToPdf(canvas);
-    console.log('W: finished - ', nameStr);
+    postMessage({
+      type: 'progress',
+      total: guestList.length,
+      current: i+1,
+      pdfBase64,
+      filename: guest.replace(/\W+/g, '_').toLowerCase(),
+    })
     // pdfBase64List.push({
     //   filename: guest.replace(/\W+/g, '_').toLowerCase(),
     //   pdfBase64,

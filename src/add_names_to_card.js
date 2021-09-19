@@ -5,19 +5,10 @@ import { saveAs } from 'file-saver';
 
 export async function addNamesToCard(config, onFinish) {
   try {
-    const cardImg = config.cardImg;
-
-    const canvasImg = document.createElement('canvas');
-    canvasImg.width = cardImg.width;
-    canvasImg.height = cardImg.height;
-    const canvas = document.createElement('canvas');
-    canvas.width = cardImg.width;
-    canvas.height = cardImg.height;
-
-    const offscreenCanvasImg = canvasImg.transferControlToOffscreen();
-    const offscreenCanvas = canvas.transferControlToOffscreen();
-
+    const cardImg = await createImageBitmap(config.cardImg);
+    const offscreenCanvas = new OffscreenCanvas(cardImg.width, cardImg.height);
     const guestList = config.guestList;
+    
     const pdfBase64List = [];
     config.resultContainerEl.innerHTML = '';
 
@@ -26,31 +17,29 @@ export async function addNamesToCard(config, onFinish) {
     );
     worker.postMessage({
       canvas: offscreenCanvas,
-      cardImg: offscreenCanvasImg,
+      cardImg,
       guestList,
       guestConfig: config.guest,
-    }, [offscreenCanvas, offscreenCanvasImg]);
+    }, [offscreenCanvas]);
     console.log('M: posted message')
-    worker.onmessage = (e) => {
-      console.log("M: Worker says - ", e.data);
-    };
-    
-    // for(const guest of guestList) {
-    //   if (guest.length === 0) {
-    //     return;
-    //   }
-    //   const nameStr = `${config.guest.prefix}${guest}${config.guest.suffix}`.toUpperCase();
-    //   addNameToCard(canvas, cardImg, nameStr, config);
-    //   const pdfBase64 = await imgToPdf(canvas);
-    //   pdfBase64List.push({
-    //     filename: guest.replace(/\W+/g, '_').toLowerCase(),
-    //     pdfBase64,
-    //   });
-    //   showPdf(pdfBase64, config.resultContainerEl);
-    // };
 
-    // config.resultCards = pdfBase64List;
-    // onFinish();
+    worker.onmessage = (e) => {
+      switch (e.data.type) {
+        case 'progress':
+          console.log(`Processed ${e.data.current}/${e.data.total} files`);
+          pdfBase64List.push({
+            filename: e.data.filename,
+            pdfBase64: e.data.pdfBase64,
+          });
+          break;
+        case 'end':
+          config.resultCards = pdfBase64List;
+          onFinish();
+          break;
+        default:
+          throw ({ error: 'Unknown message from worker', message: e.data});
+      }
+    };
   }
   catch (err) {
     console.log(err);
@@ -125,7 +114,9 @@ export async function showPdf(pdfBase64, showEl) {
 export async function imgToPdf(canvas) {
   const pdfDoc = await PDFDocument.create();
   const page = pdfDoc.addPage([canvas.width, canvas.height]);
-  const blob = await canvas.convertToBlob();
+  const blob = await canvas.convertToBlob({
+    type: "image/png",
+  });
   const imgBuffer = await blob.arrayBuffer();
   const cardImg = await pdfDoc.embedPng(imgBuffer);
   page.drawImage(cardImg, {
