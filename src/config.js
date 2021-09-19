@@ -1,5 +1,6 @@
 export const config = {
   cardImg: undefined,
+  cardImgBase64: undefined,
   previewWidth: undefined,
   guest: {
     prefix: 'Dear ',

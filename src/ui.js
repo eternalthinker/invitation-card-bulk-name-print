@@ -111,6 +111,7 @@ function addImagePreview(file) {
   const reader = new FileReader();
   reader.onload = async function() {
     const cardImg = await loadImage(reader.result);
+    _config.cardImgBase64 = reader.result;
     _config.cardImg = cardImg;
     previewTag.style.height = `${previewTag.clientWidth * cardImg.height / cardImg.width}px`;
     previewTag.style.backgroundImage = `url(${reader.result})`;

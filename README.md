@@ -10,7 +10,7 @@
 - [x] Carousel preview of final PDFs with download option: WONTDO
 - [x] PDF vs png download options: WONTDO
 - [x] Fix text preview position mapping to final canvas
-- [ ] Service worker processing of cards in bg
+- [ ] Web worker processing of cards in bg
 - [ ] Progress info while processing names
 - [x] Keep image in localstorage after upload: WONTDO
 - [ ] Text colour selection
