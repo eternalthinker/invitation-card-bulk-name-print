@@ -11,10 +11,12 @@
 - [x] PDF vs png download options: WONTDO
 - [x] Fix text preview position mapping to final canvas
 - [x] Web worker processing of cards in bg
-- [ ] Progress info while processing names
-- [ ] Web worker show PDF
-- [ ] Fix scaling factor calculation when resize to increase window size
+- [x] Progress info while processing names
+- [x] Web worker show PDF: WONTDO - show image instead
+- [x] Fix scaling factor calculation when resize to increase window size
 - [x] Keep image in localstorage after upload: WONTDO
+- [ ] Show status after csv is loaded
+- [ ] Disable buttons when generating cards
 - [ ] Text colour selection
 - [ ] Configure text prefix and suffix
 - [ ] Configure preview text contents

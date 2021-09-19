@@ -15,11 +15,14 @@ export function initUi(config) {
   // Preview area
   previewTag = document.querySelector('.cardPreview');
   const sizer = function() {
-    previewTag.style.width = `${window.innerWidth * 0.7}px`
-    _config.previewWidth = previewTag.clientWidth;
+    const previewWidth = Math.min(window.innerWidth * 0.7, 900);
+    previewTag.style.width = `${previewWidth}px`
+    _config.previewWidth = previewWidth;
     // const dpi = window.devicePixelRatio; // In case of errors in retina
     if (_config.cardImg) {
-      scalingFactor = _config.previewWidth / _config.cardImg.width;
+      const cardImg = _config.cardImg;
+      scalingFactor = previewWidth / cardImg.width;
+      previewTag.style.height = `${scalingFactor * cardImg.height}px`;
       updatePreviewText();
     }
   };
@@ -38,6 +41,7 @@ export function initUi(config) {
   uploadCsvInput.addEventListener('change', processCsvFile);
 
   _config.resultContainerEl = document.querySelector('.resultSection');
+  _config.progressTextEl = document.querySelector('.progressText');
 
   uploadCsvButton = document.querySelector('.csvUploadButton');
   processButton = document.querySelector('.processButton');

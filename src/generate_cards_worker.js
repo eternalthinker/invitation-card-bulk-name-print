@@ -45,13 +45,11 @@ async function addNamesToCard(data) {
       type: 'progress',
       total: guestList.length,
       current: i+1,
+      guest,
+      finalImg: canvas.transferToImageBitmap(),
       pdfBase64,
       filename: guest.replace(/\W+/g, '_').toLowerCase(),
     })
-    // pdfBase64List.push({
-    //   filename: guest.replace(/\W+/g, '_').toLowerCase(),
-    //   pdfBase64,
-    // });
-    // showPdf(pdfBase64, config.resultContainerEl);
+    
   };
 }

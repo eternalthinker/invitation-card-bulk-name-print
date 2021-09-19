@@ -70,6 +70,19 @@ h1 {
   color: #888;
 }
 
+.progressInfo {
+  display: flex;
+  height: 20px;
+  margin: 5px 0 10px;
+}
+
+.progressText {
+  color: rgb(126, 126, 126);
+  font-size: 0.8em;
+  line-height: 1em;
+  font-style: italic;
+}
+
 .cardPreview {
   background-size: contain;
   background-repeat: no-repeat;

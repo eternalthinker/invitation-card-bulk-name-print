@@ -22,4 +22,5 @@ export const config = {
     */
   ],
   resultContainerEl: undefined,
+  progressTextEl: undefined,
 };

@@ -26,16 +26,32 @@ export async function addNamesToCard(config, onFinish) {
     worker.onmessage = (e) => {
       switch (e.data.type) {
         case 'progress':
-          console.log(`Processed ${e.data.current}/${e.data.total} files`);
+        {
           pdfBase64List.push({
             filename: e.data.filename,
             pdfBase64: e.data.pdfBase64,
           });
+
+          const progressText = `Processed ${e.data.current}/${e.data.total} files. Last processed: ${e.data.guest}`;
+          config.progressTextEl.innerHTML = progressText;
+
+          const resultCanvas = document.createElement('canvas');
+          const w = 400;
+          const h = w * cardImg.height / cardImg.width;
+          resultCanvas.width = w;
+          resultCanvas.height = h;
+          resultCanvas.style.margin = '5px';
+          const ctx = resultCanvas.getContext('2d');
+          ctx.drawImage(e.data.finalImg, 0, 0, w, h);
+          config.resultContainerEl.appendChild(resultCanvas);
           break;
+        }
         case 'end':
+        {
           config.resultCards = pdfBase64List;
           onFinish();
           break;
+        }
         default:
           throw ({ error: 'Unknown message from worker', message: e.data});
       }
@@ -58,7 +74,7 @@ export async function downloadZip(pdfBase64List) {
     });
 }
 
-export async function addNameToCard(canvas, cardImg, nameStr, guestConfig) {
+export function addNameToCard(canvas, cardImg, nameStr, guestConfig) {
   const ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(cardImg, 0, 0);
@@ -69,10 +85,6 @@ export async function addNameToCard(canvas, cardImg, nameStr, guestConfig) {
   ctx.textBaseline = 'top';
   const textWidth = ctx.measureText(nameStr).width;
   ctx.fillText(nameStr, (canvas.width - textWidth) / 2, guestConfig.position.y);
-  
-  //const resultImg = new Image();
-  //resultImg.src = canvas.toDataURL();
-  //document.body.appendChild(resultImg);
 }
 
 async function showIframe(pdfBase64) {
