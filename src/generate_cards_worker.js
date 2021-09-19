@@ -43,7 +43,6 @@ async function addNamesToCard(data) {
     const pdfBase64 = await imgToPdf(canvas);
     postMessage({
       type: 'progress',
-      total: guestList.length,
       current: i+1,
       guest,
       finalImg: canvas.transferToImageBitmap(),

@@ -7,6 +7,7 @@ let previewTag = undefined;
 let uploadCsvButton = undefined;
 let processButton = undefined;
 let downloadButton = undefined;
+let progressText = undefined;
 let scalingFactor = 1;
 
 export function initUi(config) {
@@ -41,7 +42,9 @@ export function initUi(config) {
   uploadCsvInput.addEventListener('change', processCsvFile);
 
   _config.resultContainerEl = document.querySelector('.resultSection');
-  _config.progressTextEl = document.querySelector('.progressText');
+  progressText = document.querySelector('.progressText');
+  _config.progressTextEl = progressText;
+  _config.actionButtons = document.querySelectorAll('.actionButton');
 
   uploadCsvButton = document.querySelector('.csvUploadButton');
   processButton = document.querySelector('.processButton');
@@ -99,6 +102,7 @@ function processCsvFile(e) {
     const guestList = csvFile.split(/\r\n|\n/);
     _config.guestList = guestList;
     processButton.classList.remove('disabled');
+    progressText.innerHTML = `CSV file loaded. ${guestList.length} lines found (may include empty lines)`;
   };
   reader.readAsText(file);
 }

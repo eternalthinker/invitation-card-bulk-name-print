@@ -15,10 +15,12 @@
 - [x] Web worker show PDF: WONTDO - show image instead
 - [x] Fix scaling factor calculation when resize to increase window size
 - [x] Keep image in localstorage after upload: WONTDO
-- [ ] Show status after csv is loaded
-- [ ] Disable buttons when generating cards
+- [x] Show status after csv is loaded
+- [x] Disable buttons when generating cards
 - [ ] Text colour selection
 - [ ] Configure text prefix and suffix
 - [ ] Configure preview text contents
+- [ ] Disable buttons after changes are made to text
 - [ ] Possible multiline text and preview text
+- [ ] Font upload
 

@@ -11,6 +11,9 @@ export async function addNamesToCard(config, onFinish) {
     
     const pdfBase64List = [];
     config.resultContainerEl.innerHTML = '';
+    config.actionButtons.forEach((button) => {
+      button.classList.add('disabled');
+    });
 
     const worker = new Worker(
       new URL('./generate_cards_worker.js', import.meta.url),
@@ -21,7 +24,6 @@ export async function addNamesToCard(config, onFinish) {
       guestList,
       guestConfig: config.guest,
     }, [offscreenCanvas]);
-    console.log('M: posted message')
 
     worker.onmessage = (e) => {
       switch (e.data.type) {
@@ -32,7 +34,7 @@ export async function addNamesToCard(config, onFinish) {
             pdfBase64: e.data.pdfBase64,
           });
 
-          const progressText = `Processed ${e.data.current}/${e.data.total} files. Last processed: ${e.data.guest}`;
+          const progressText = `Processed ${e.data.current} cards. Last processed: ${e.data.guest}`;
           config.progressTextEl.innerHTML = progressText;
 
           const resultCanvas = document.createElement('canvas');
@@ -50,6 +52,9 @@ export async function addNamesToCard(config, onFinish) {
         {
           config.resultCards = pdfBase64List;
           onFinish();
+          config.actionButtons.forEach((button) => {
+            button.classList.remove('disabled');
+          });
           break;
         }
         default:
