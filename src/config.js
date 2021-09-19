@@ -1,6 +1,5 @@
 export const config = {
   cardImg: undefined,
-  cardImgBase64: undefined,
   previewWidth: undefined,
   guest: {
     prefix: 'Dear ',
@@ -23,4 +22,5 @@ export const config = {
   ],
   resultContainerEl: undefined,
   progressTextEl: undefined,
+  actionButtons: undefined,
 };

@@ -1,5 +1,4 @@
 import { PDFDocument } from 'pdf-lib';
-import * as pdfjsLib from 'pdfjs-dist/webpack';
 import * as JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 
@@ -79,6 +78,7 @@ export async function downloadZip(pdfBase64List) {
     });
 }
 
+// Used by web worker
 export function addNameToCard(canvas, cardImg, nameStr, guestConfig) {
   const ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -92,12 +92,39 @@ export function addNameToCard(canvas, cardImg, nameStr, guestConfig) {
   ctx.fillText(nameStr, (canvas.width - textWidth) / 2, guestConfig.position.y);
 }
 
+// Used by web worker
+export async function imgToPdf(canvas) {
+  const pdfDoc = await PDFDocument.create();
+  const page = pdfDoc.addPage([canvas.width, canvas.height]);
+  const blob = await canvas.convertToBlob({
+    type: "image/png",
+  });
+  const imgBuffer = await blob.arrayBuffer();
+  const cardImg = await pdfDoc.embedPng(imgBuffer);
+  page.drawImage(cardImg, {
+    x: 0,
+    y: 0,
+    width: cardImg.width,
+    height: cardImg.height,
+  });
+  const pdfBase64 = await pdfDoc.saveAsBase64();
+  return pdfBase64;
+}
+
+/*
+ * Not used, as card preview is shown through a canvas
+ *
 async function showIframe(pdfBase64) {
   const iframe = document.createElement('iframe');
   iframe.src = `data:application/pdf;base64,${pdfBase64}`;
   document.body.appendChild(iframe);
 }
+*/
 
+/*
+ * Not used, as showing a preview only requires showing the image,
+ * and not necessarily rendering the final PDF
+ * 
 export async function showPdf(pdfBase64, showEl) {
   return new Promise(async (res, rej) => {
     try {
@@ -127,25 +154,4 @@ export async function showPdf(pdfBase64, showEl) {
     }
   });
 }
-
-export async function imgToPdf(canvas) {
-  const pdfDoc = await PDFDocument.create();
-  const page = pdfDoc.addPage([canvas.width, canvas.height]);
-  const blob = await canvas.convertToBlob({
-    type: "image/png",
-  });
-  const imgBuffer = await blob.arrayBuffer();
-  const cardImg = await pdfDoc.embedPng(imgBuffer);
-  page.drawImage(cardImg, {
-    x: 0,
-    y: 0,
-    width: cardImg.width,
-    height: cardImg.height,
-  });
-  const pdfBase64 = await pdfDoc.saveAsBase64();
-  return pdfBase64;
-}
-
-
-
-
+*/
