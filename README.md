@@ -17,7 +17,7 @@
 - [x] Keep image in localstorage after upload: WONTDO
 - [x] Show status after csv is loaded
 - [x] Disable buttons when generating cards
-- [ ] Webpack dev and prod config
+- [x] Webpack dev and prod config
 - [ ] Button press feedback
 - [ ] Try Now alt fonts - medium
 - [ ] Text colour selection
