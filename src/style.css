@@ -57,6 +57,11 @@ h1 {
   transform: translateY(-5px);
 }
 
+.actionButton:active {
+  transform: translateY(0px);
+  box-shadow: 0px 8px 10px rgba(150, 73, 223, 0.3);
+}
+
 .actionButton.disabled {
   background-color: #ccc;
   color: #888;

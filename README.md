@@ -18,7 +18,7 @@
 - [x] Show status after csv is loaded
 - [x] Disable buttons when generating cards
 - [x] Webpack dev and prod config
-- [ ] Button press feedback
+- [x] Button press feedback
 - [ ] Try Now alt fonts - medium
 - [ ] Text colour selection
 - [ ] Configure text prefix and suffix
