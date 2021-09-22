@@ -1,9 +1,10 @@
 export const config = {
   cardImg: undefined,
   previewWidth: undefined,
+  previewTextContent: 'John Doe & Jane Citizen',
   guest: {
     prefix: 'Dear ',
-    suffix: '',
+    suffix: ',',
     color: '#52644e',
     font: {
       family: 'Now',

@@ -19,7 +19,7 @@
 body {
   font-family: "Now";
   padding: 20px 50px 50px;
-  font-size: 1em;
+  font-size: 16px;
 }
 
 h1 {
@@ -73,6 +73,51 @@ h1 {
 .actionButton.disabled:hover {
   background-color: #ccc;
   color: #888;
+}
+
+.textControls {
+  display: flex;
+  gap: 30px;
+  visibility: hidden;
+}
+
+.textInput {
+  background-color: #fff;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  outline: none;
+  padding: 5px;
+  color: #333;
+  font-size: 0.8em;
+  text-transform: uppercase;
+}
+
+.textInput:focus {
+  outline: none;
+  border-color: rgb(149, 60, 231);
+  color: black;
+}
+
+.textColorPreview {
+  display: inline-block;
+  background-color: #52644e;
+  border-radius: 5px;
+  height: 30px;
+  width: 30px;
+  vertical-align: middle;
+}
+
+#textColorInput {
+  width: 100px;
+}
+
+#textPrefixInput,
+#textSuffixInput {
+  width: 80px;
+}
+
+#textPreviewContentInput {
+  width: 200px;
 }
 
 .progressInfo {
