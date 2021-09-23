@@ -144,6 +144,7 @@ h1 {
   background-repeat: no-repeat;
   background-position: top left;
   position: relative;
+  overflow: visible;
 }
 
 .previewText {
@@ -154,6 +155,49 @@ h1 {
   text-transform: uppercase;
   user-select: none;
   cursor: move;
+}
+
+.hint {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-size: 0.8em;
+  padding: 15px;
+  border-radius: 5px;
+  visibility: hidden;
+  white-space: nowrap;
+}
+
+.hint.hintToLeft {
+  animation: floatingHorizontal 1s linear 0s infinite;
+}
+
+.hint.hintToLeft:before {
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 10px solid transparent;
+  border-right: 10px solid rgba(0, 0, 0, 0.7);
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  top: 15px;
+  left: -20px;
+}
+
+@keyframes floatingHorizontal {
+  from { transform: translate(0px, 0px); }
+  65% { transform: translate(10px, 0px); }
+  to { transform: translate(0px, 0px); }
+}
+
+.hintCloseButton {
+  font-weight: bold;
+  font-size: 1.3em;
+  margin-left: 10px;
+  cursor: pointer;
 }
 
 .resultSection {

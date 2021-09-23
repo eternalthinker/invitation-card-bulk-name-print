@@ -99,6 +99,42 @@ function initTextControls() {
   });
 }
 
+function showPreviewTextHint() {
+  const previewTextHint = document.querySelector('.previewTextHint');
+  previewTextHint.style.top = `${previewText.offsetTop - (previewTextHint.offsetHeight/2)}px`;
+  previewTextHint.style.left = `${previewText.offsetLeft + previewText.offsetWidth + 20}px`;
+
+  const closeButton = previewTextHint.querySelector('.hintCloseButton');
+  const fadeStartTimer = setTimeout(() => {
+    fade(previewTextHint, 1000);
+  }, 5000);
+  closeButton.addEventListener('click', () => {
+    clearTimeout(fadeStartTimer);
+    fade(previewTextHint, 1000);
+  });
+  previewTextHint.style.opacity = 1;
+  previewTextHint.style.visibility = 'visible';
+}
+
+function fade(el, durationMs) {
+  const startTime = new Date();
+
+  const fadeStep = () => {
+    const curTime = new Date();
+    const msPassed = curTime - startTime;
+    if (msPassed > durationMs) {
+      el.style.visibility = 'hidden';
+      return;
+    }
+    const alpha = 1 - (msPassed / durationMs);
+    el.style.opacity = alpha;
+
+    window.requestAnimationFrame(fadeStep);
+  }
+
+  window.requestAnimationFrame(fadeStep);
+}
+
 function updateConfigText(text, configKeyArr) {
   let configObj = _config;
   for(let i = 0; i < configKeyArr.length - 1; ++i) {
@@ -185,6 +221,7 @@ function showTextControls() {
   updatePreviewText();
   document.querySelector('.textControls').style.visibility = 'visible';
   previewText.style.visibility = 'visible';
+  showPreviewTextHint();
 }
 
 function updatePreviewText() {

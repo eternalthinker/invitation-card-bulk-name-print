@@ -23,7 +23,7 @@
 - [x] Text colour selection
 - [x] Configure text prefix and suffix
 - [x] Configure preview text contents
-- [ ] Notification to show that text can be dragged
+- [x] Notification to show that text can be dragged
 - [x] Disable buttons after changes are made to text
 - [ ] Possible multiline text and preview text
 - [ ] Font upload
