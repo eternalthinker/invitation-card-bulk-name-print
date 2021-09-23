@@ -56,6 +56,56 @@ export function initUi(config) {
     downloadButton.classList.remove('disabled');
   };
   processButton.addEventListener('click', () => addNamesToCard(_config, postProcessCallback));
+
+  initTextControls();
+}
+
+function initTextControls() {
+  const textColorInput = document.querySelector('#textColorInput');
+  const textColorPreview = document.querySelector('.textColorPreview');
+  textColorInput.value = _config.guest.color;
+  textColorPreview.style.backgroundColor = _config.guest.color;
+
+  const regex = /^#[A-Fa-f0-9]{6}$/;
+  textColorInput.addEventListener('input', (e) => {
+    const value = textColorInput.value;
+    const match = value.match(regex);
+    if (match == null) {
+      textColorInput.classList.add('error');
+      return;
+    }
+    textColorInput.classList.remove('error');
+    textColorPreview.style.backgroundColor = value;
+    _config.guest.color = value;
+    updatePreviewText();
+  });
+
+
+  const textPrefixInput = document.querySelector('#textPrefixInput');
+  const textSuffixInput = document.querySelector('#textSuffixInput');
+  const textPreviewContentInput = document.querySelector('#textPreviewContentInput');
+  textPrefixInput.value = _config.guest.prefix;
+  textSuffixInput.value = _config.guest.suffix;
+  textPreviewContentInput.value = _config.previewTextContent;
+
+  textPrefixInput.addEventListener('input', (e) => {
+    updateConfigText(textPrefixInput.value, ['guest', 'prefix']);
+  });
+  textSuffixInput.addEventListener('input', (e) => {
+    updateConfigText(textSuffixInput.value, ['guest', 'suffix']);
+  });
+  textPreviewContentInput.addEventListener('input', (e) => {
+    updateConfigText(textPreviewContentInput.value, ['previewTextContent']);
+  });
+}
+
+function updateConfigText(text, configKeyArr) {
+  let configObj = _config;
+  for(let i = 0; i < configKeyArr.length - 1; ++i) {
+    configObj = configObj[configKeyArr[i]];
+  }
+  configObj[configKeyArr[configKeyArr.length - 1]] = text;
+  updatePreviewText();
 }
 
 function initTextDrag() {
@@ -131,11 +181,13 @@ function addImagePreview(file) {
 }
 
 function showTextControls() {
+  document.querySelector('.textControls').style.visibility = 'visible';
   updatePreviewText();
   previewText.style.visibility = 'visible';
 }
 
 function updatePreviewText() {
+  previewText.innerHTML = `${_config.guest.prefix}${_config.previewTextContent}${_config.guest.suffix}`;
   previewText.style.fontFamily = _config.guest.font.family;
   previewText.style.fontSize = `${_config.guest.font.size * scalingFactor}px`;
   previewText.style.fontWeight = _config.guest.font.weight;
