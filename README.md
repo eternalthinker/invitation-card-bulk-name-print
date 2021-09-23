@@ -20,10 +20,11 @@
 - [x] Webpack dev and prod config
 - [x] Button press feedback
 - [ ] Try Now alt fonts - medium
-- [ ] Text colour selection
-- [ ] Configure text prefix and suffix
-- [ ] Configure preview text contents
-- [ ] Disable buttons after changes are made to text
+- [x] Text colour selection
+- [x] Configure text prefix and suffix
+- [x] Configure preview text contents
+- [ ] Notification to show that text can be dragged
+- [x] Disable buttons after changes are made to text
 - [ ] Possible multiline text and preview text
 - [ ] Font upload
 

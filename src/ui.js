@@ -137,6 +137,7 @@ function initTextDrag() {
         isTextDragged = false;
       }
       _config.guest.position.y = previewText.offsetTop / scalingFactor;
+      downloadButton.classList.add('disabled');
     }
   })
 }
@@ -181,8 +182,8 @@ function addImagePreview(file) {
 }
 
 function showTextControls() {
-  document.querySelector('.textControls').style.visibility = 'visible';
   updatePreviewText();
+  document.querySelector('.textControls').style.visibility = 'visible';
   previewText.style.visibility = 'visible';
 }
 
@@ -196,4 +197,6 @@ function updatePreviewText() {
   const previewWidth = _config.previewWidth;
   previewText.style.left = `${(previewWidth - textWidth) / 2}px`;
   previewText.style.top = `${_config.guest.position.y * scalingFactor}px`;
+
+  downloadButton.classList.add('disabled');
 }
