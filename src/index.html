@@ -11,9 +11,18 @@
         <input type="file" id="imageUploadInput" accept="image/*" hidden/>
         <label class="actionButton imageUploadButton" for="imageUploadInput">Upload your invitation card</label>
         <input type="file" id="csvUploadInput" accept=".csv" hidden/>
-        <label class="actionButton csvUploadButton disabled" for="csvUploadInput">Upload guest names CSV</label>
+        <label class="actionButton csvUploadButton disabled" for="csvUploadInput">
+          Upload guest list
+          <span class="hintButton">?</span>
+          <div class="hoverHintContainer">
+            <div class="hint hintToLeft hoverHint">
+              A file with each invitee name in a separate line, saved as .csv or .txt
+            </div>
+          </div>  
+        </label>
         <button class="actionButton processButton disabled">Generate cards</button>
         <button class="actionButton downloadButton disabled">Download cards</button>
+        <button class="actionButton fontUploadButton disabled">Upload font</button>
       </div>
 
       <div class="progressInfo">
@@ -51,7 +60,7 @@
 
       <div class="cardPreview">
         <p class="previewText">Dear John Doe and Jane Citizen</p>
-        <div class="previewTextHint hint hintToLeft">
+        <div class="previewTextHint hint hintToLeft animated">
           You can drag this text to adjust its position!
           <span class="hintCloseButton">x</span>
         </div>
