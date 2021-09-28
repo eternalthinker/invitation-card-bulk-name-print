@@ -1,30 +1,8 @@
-- [x] Image -> PDF
-- [x] ZIP download
-- [x] Image upload
-- [x] Download button
-- [x] CSV upload
-- [x] Delete localstorage image and csv button - WONTDO: new uploads overwrite old ones
-- [x] Text box with contents of csv?: WONTDO
-- [x] Text y-position based on draggable text on preview
-- [x] Download button in case auto-downlaod is blocked: No Autodownload
-- [x] Carousel preview of final PDFs with download option: WONTDO
-- [x] PDF vs png download options: WONTDO
-- [x] Fix text preview position mapping to final canvas
-- [x] Web worker processing of cards in bg
-- [x] Progress info while processing names
-- [x] Web worker show PDF: WONTDO - show image instead
-- [x] Fix scaling factor calculation when resize to increase window size
-- [x] Keep image in localstorage after upload: WONTDO
-- [x] Show status after csv is loaded
-- [x] Disable buttons when generating cards
-- [x] Webpack dev and prod config
-- [x] Button press feedback
-- [ ] Try Now alt fonts - medium
-- [x] Text colour selection
-- [x] Configure text prefix and suffix
-- [x] Configure preview text contents
-- [x] Notification to show that text can be dragged
-- [x] Disable buttons after changes are made to text
+## Description
+Lets you upload an invitation card image, and a list of invitees, and generates cards with individual invitee names.
+
+### TODO
+- [ ] Font size adjustment
 - [ ] Possible multiline text and preview text
 - [ ] Font upload
 
