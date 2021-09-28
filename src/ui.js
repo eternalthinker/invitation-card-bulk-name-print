@@ -66,10 +66,10 @@ function initTextControls() {
   textColorInput.value = _config.guest.color;
   textColorPreview.style.backgroundColor = _config.guest.color;
 
-  const regex = /^#[A-Fa-f0-9]{6}$/;
+  const colorRegex = /^#[A-Fa-f0-9]{6}$/;
   textColorInput.addEventListener('input', (e) => {
     const value = textColorInput.value;
-    const match = value.match(regex);
+    const match = value.match(colorRegex);
     if (match == null) {
       textColorInput.classList.add('error');
       return;
@@ -77,6 +77,22 @@ function initTextControls() {
     textColorInput.classList.remove('error');
     textColorPreview.style.backgroundColor = value;
     _config.guest.color = value;
+    updatePreviewText();
+  });
+
+  const textSizeInput = document.querySelector('#textSizeInput');
+  textSizeInput.value = _config.guest.font.size;
+  const sizeRegex = /^[0-9]+(\.[0-9]*)?$/;
+  textSizeInput.addEventListener('input', (e) => {
+    const value = textSizeInput.value;
+    const match = value.match(sizeRegex);
+    const numValue = parseFloat(value);
+    if (match == null || isNaN(numValue)) {
+      textSizeInput.classList.add('error');
+      return;
+    }
+    textSizeInput.classList.remove('error');
+    _config.guest.font.size = numValue;
     updatePreviewText();
   });
 

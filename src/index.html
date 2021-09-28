@@ -23,7 +23,17 @@
       <div class="textControls">
         <div class="textColourGroup">
           <span class="textColorPreview"></span>
-          <input type="text" id="textColorInput" class="textInput" placeholder="#000000"/>
+          <input
+            type="text" id="textColorInput" class="textInput" placeholder="#000000"
+            maxlength="7"
+          />
+        </div>
+        <div class="textSizeGroup">
+          <label class="textControlLabel" for="textSizeInput">Size</label>
+          <input 
+            type="number" id="textSizeInput" class="textInput" placeholder="32"
+            min="8"
+          />
         </div>
         <div class="textPrefixGroup">
           <label class="textControlLabel" for="textPrefixInput">Prefix</label>

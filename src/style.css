@@ -86,7 +86,7 @@ h1 {
   border: 2px solid #ddd;
   border-radius: 5px;
   outline: none;
-  padding: 5px;
+  padding: 10px;
   color: #333;
   font-size: 0.8em;
   text-transform: uppercase;
@@ -115,6 +115,10 @@ h1 {
 
 #textColorInput {
   width: 100px;
+}
+
+#textSizeInput {
+  width: 80px;
 }
 
 #textPrefixInput,
