@@ -6,3 +6,4 @@ Lets you upload an invitation card image, and a list of invitees, and generate c
 - [ ] Font upload
 - [ ] Hint button for guest list upload
 - [ ] Text alignment controls
+- [ ] Card processing loading icon/bar
