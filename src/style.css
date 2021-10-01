@@ -83,11 +83,12 @@ h1 {
   color: #ddd;
   font-weight: bold;
   font-size: 0.8em;
+  line-height: 0.8em;
   border-radius: 50%;
-  padding: 3px 6px;
+  padding: 6px 6px 4px;
   cursor: pointer;
   display: inline-block;
-  align-items: center;
+  vertical-align: middle;
 }
 
 .hintButton:hover {
