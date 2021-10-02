@@ -41,6 +41,9 @@ export function initUi(config) {
   const uploadCsvInput = document.querySelector('#csvUploadInput');
   uploadCsvInput.addEventListener('change', processCsvFile);
 
+  const uploadFontInput = document.querySelector('#fontUploadInput');
+  uploadFontInput.addEventListener('change', processFontFile);
+
   _config.resultContainerEl = document.querySelector('.resultSection');
   progressText = document.querySelector('.progressText');
   _config.progressTextEl = progressText;
@@ -210,15 +213,31 @@ function processCsvFile(e) {
   reader.readAsText(file);
 }
 
+function processFontFile(e) {
+  const file = e.currentTarget.files[0];
+  if (!file) {
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = async function() {
+    _config.fontBase64 = reader.result;
+    _config.fontName = `Custom-${Math.floor(Math.random() * 100000)}`;
+    const fontFace = new FontFace(_config.fontName, `url(${_config.fontBase64})`);
+    fontFace.load()
+      .then(loadedFont => {
+        document.fonts.add(loadedFont);
+        updatePreviewText();
+      })
+      .catch(err => console.error('Font load error:', err));
+  };
+  reader.readAsDataURL(file);
+}
+
 function processImageFile(e) {
   const file = e.currentTarget.files[0];
   if (!file) {
     return;
   }
-  addImagePreview(file);
-}
-
-function addImagePreview(file) {
   const reader = new FileReader();
   reader.onload = async function() {
     const cardImg = await loadImage(reader.result);
@@ -242,7 +261,7 @@ function showTextControls() {
 
 function updatePreviewText() {
   previewText.innerHTML = `${_config.guest.prefix}${_config.previewTextContent}${_config.guest.suffix}`;
-  previewText.style.fontFamily = _config.guest.font.family;
+  previewText.style.fontFamily = _config.fontName || _config.guest.font.family;
   previewText.style.fontSize = `${_config.guest.font.size * scalingFactor}px`;
   previewText.style.fontWeight = _config.guest.font.weight;
   previewText.style.color = _config.guest.color;

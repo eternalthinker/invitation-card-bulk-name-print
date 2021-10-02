@@ -2,13 +2,15 @@ export const config = {
   cardImg: undefined,
   previewWidth: undefined,
   previewTextContent: 'John Doe & Jane Citizen',
+  fontBase64: undefined,
+  fontName: undefined,
   guest: {
     prefix: 'Dear ',
     suffix: ',',
     color: '#52644e',
     font: {
-      family: 'Now',
-      weight: 'bold',
+      family: 'Now Alt',
+      weight: 'medium',
       size: 32, // px
     },
     position: {
