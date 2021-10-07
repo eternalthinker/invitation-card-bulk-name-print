@@ -84,7 +84,7 @@ export function addNameToCard(canvas, cardImg, nameStr, guestConfig) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(cardImg, 0, 0);
   const font = guestConfig.font;
-  const fontStr = `${font.weight} ${font.size}px ${font.family}`;
+  const fontStr = `${font.weight} ${font.size}px "${font.family}"`;
   ctx.font = fontStr;
   ctx.fillStyle = guestConfig.color;
   ctx.textBaseline = 'top';

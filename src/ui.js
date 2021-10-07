@@ -220,9 +220,12 @@ function processFontFile(e) {
   }
   const reader = new FileReader();
   reader.onload = async function() {
-    _config.fontBase64 = reader.result;
-    _config.fontName = `Custom-${Math.floor(Math.random() * 100000)}`;
-    const fontFace = new FontFace(_config.fontName, `url(${_config.fontBase64})`);
+    _config.guest.font.base64 = reader.result;
+    _config.guest.font.family = `Custom-${Math.floor(Math.random() * 100000)}`;
+    const fontFace = new FontFace(
+      _config.guest.font.family,
+      `url(${_config.guest.font.base64})`,
+    );
     fontFace.load()
       .then(loadedFont => {
         document.fonts.add(loadedFont);
@@ -261,7 +264,7 @@ function showTextControls() {
 
 function updatePreviewText() {
   previewText.innerHTML = `${_config.guest.prefix}${_config.previewTextContent}${_config.guest.suffix}`;
-  previewText.style.fontFamily = _config.fontName || _config.guest.font.family;
+  previewText.style.fontFamily = _config.guest.font.family;
   previewText.style.fontSize = `${_config.guest.font.size * scalingFactor}px`;
   previewText.style.fontWeight = _config.guest.font.weight;
   previewText.style.color = _config.guest.color;

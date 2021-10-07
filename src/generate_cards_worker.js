@@ -1,11 +1,10 @@
 import { addNameToCard, imgToPdf } from './add_names_to_card';
-import nowBoldFont from './fonts/now.bold.otf';
 
 onmessage = async (e) => {
   try {
     const fontFace = new FontFace(
-      'Now',
-      `url(${nowBoldFont})`,
+      guestConfig.font.family,
+      `url(${guestConfig.font.base64})`,
     );
     // add it to the list of fonts our worker supports
     self.fonts.add(fontFace);
