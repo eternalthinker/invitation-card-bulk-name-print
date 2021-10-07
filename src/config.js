@@ -8,7 +8,7 @@ export const config = {
     color: '#52644e',
     font: {
       family: 'Now Alt',
-      weight: 'medium',
+      weight: 500,
       size: 32, // px
       base64: undefined,
     },
