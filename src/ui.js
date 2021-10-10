@@ -197,6 +197,10 @@ function initTextDrag() {
   })
 }
 
+function trimQuotes(str) {
+  return str.replace(/^["]+|["]+$/g, '');
+}
+
 function processCsvFile(e) {
   const file = e.currentTarget.files[0];
   if (!file) {
@@ -205,7 +209,7 @@ function processCsvFile(e) {
   const reader = new FileReader();
   reader.onload = async function() {
     const csvFile = reader.result;
-    const guestList = csvFile.split(/\r\n|\n/);
+    const guestList = csvFile.split(/\r\n|\n/).map(trimQuotes);
     _config.guestList = guestList;
     processButton.classList.remove('disabled');
     progressText.innerHTML = `CSV file loaded. ${guestList.length} lines found (may include empty lines)`;
