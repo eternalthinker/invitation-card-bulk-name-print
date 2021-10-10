@@ -5,6 +5,7 @@ export const config = {
   guest: {
     prefix: 'Dear ',
     suffix: ',',
+    lineBreakCharacter: '#',
     color: '#52644e',
     font: {
       family: 'Now Alt',

@@ -56,6 +56,11 @@ export async function addNamesToCard(config, onFinish) {
           });
           break;
         }
+        case 'info':
+        {
+          console.log('W:', e.data);
+          break;
+        }
         default:
           throw ({ error: 'Unknown message from worker', message: e.data});
       }
@@ -79,7 +84,7 @@ export async function downloadZip(pdfBase64List) {
 }
 
 // Used by web worker
-export function addNameToCard(canvas, cardImg, nameStr, guestConfig) {
+export function addNameToCard(canvas, cardImg, nameStrs, guestConfig) {
   const ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(cardImg, 0, 0);
@@ -87,9 +92,16 @@ export function addNameToCard(canvas, cardImg, nameStr, guestConfig) {
   const fontStr = `${font.weight} ${font.size}px "${font.family}"`;
   ctx.font = fontStr;
   ctx.fillStyle = guestConfig.color;
-  ctx.textBaseline = 'top';
-  const textWidth = ctx.measureText(nameStr).width;
-  ctx.fillText(nameStr, (canvas.width - textWidth) / 2, guestConfig.position.y);
+  ctx.textBaseline = 'top'; // Not sure if this is necessary
+  ctx.textAlign = 'center';
+  for(let i = 0; i < nameStrs.length; i++) {
+    const nameStr = nameStrs[i];
+    ctx.fillText(
+      nameStr,
+      canvas.width/ 2,
+      guestConfig.position.y + (i * 1.5 * font.size),
+    );
+  }
 }
 
 // Used by web worker

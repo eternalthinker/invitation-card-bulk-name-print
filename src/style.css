@@ -199,6 +199,8 @@ h1 {
   text-transform: uppercase;
   user-select: none;
   cursor: move;
+  text-align: center;
+  line-height: 1.5;
 }
 
 .hint {

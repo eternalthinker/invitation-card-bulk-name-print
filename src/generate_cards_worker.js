@@ -41,7 +41,8 @@ async function addNamesToCard(data) {
       return;
     }
     const nameStr = `${guestConfig.prefix}${guest}${guestConfig.suffix}`.toUpperCase();
-    addNameToCard(canvas, cardImg, nameStr, guestConfig);
+    const nameStrs = nameStr.split(guestConfig.lineBreakCharacter);
+    addNameToCard(canvas, cardImg, nameStrs, guestConfig);
     const pdfBase64 = await imgToPdf(canvas);
     postMessage({
       type: 'progress',

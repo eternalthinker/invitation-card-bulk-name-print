@@ -268,7 +268,8 @@ function showTextControls() {
 }
 
 function updatePreviewText() {
-  previewText.innerHTML = `${_config.guest.prefix}${_config.previewTextContent}${_config.guest.suffix}`;
+  const content = _config.previewTextContent.replace(_config.guest.lineBreakCharacter, '<br/>');
+  previewText.innerHTML = `${_config.guest.prefix}${content}${_config.guest.suffix}`;
   previewText.style.fontFamily = _config.guest.font.family;
   previewText.style.fontSize = `${_config.guest.font.size * scalingFactor}px`;
   previewText.style.fontWeight = _config.guest.font.weight;
