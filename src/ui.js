@@ -251,6 +251,7 @@ function processImageFile(e) {
     scalingFactor = _config.previewWidth / _config.cardImg.width;
     showTextControls();
     uploadCsvButton.classList.remove('disabled');
+    document.querySelector('.fontUploadButton').classList.remove('disabled');
   };
   reader.readAsDataURL(file);
 }
