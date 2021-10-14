@@ -8,3 +8,5 @@ Lets you upload an invitation card image, and a list of invitees, and generate c
 - [ ] Card processing loading icon/bar
 - [ ] Configure line break character/string
 - [ ] Responsive
+- [ ] Multiple line breaks
+- [ ] Trim spaces
