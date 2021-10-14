@@ -92,13 +92,13 @@ export function addNameToCard(canvas, cardImg, nameStrs, guestConfig) {
   const fontStr = `${font.weight} ${font.size}px "${font.family}"`;
   ctx.font = fontStr;
   ctx.fillStyle = guestConfig.color;
-  ctx.textBaseline = 'top'; // Not sure if this is necessary
+  ctx.textBaseline = 'top'; // Render text with the y position as top
   ctx.textAlign = 'center';
   for(let i = 0; i < nameStrs.length; i++) {
     const nameStr = nameStrs[i];
     ctx.fillText(
       nameStr,
-      canvas.width/ 2,
+      canvas.width / 2,
       guestConfig.position.y + (i * 1.5 * font.size),
     );
   }
